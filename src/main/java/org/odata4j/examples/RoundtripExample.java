@@ -38,6 +38,43 @@ public class RoundtripExample extends AbstractExample {
   public static class Customer {
 
     private String id;
+    private String name;
+
+
+    public Customer() {}
+
+    public Customer(String id, String name) {
+      this.id = id;
+      this.name = name;
+
+    }
+
+    public String getId() {
+      return id;
+    }
+
+
+
+
+
+    public String getName() {
+      return name;
+    }
+
+    public void setId(String id) {
+      this.id = id;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+
+
+  }
+
+  /*public static class Customer {
+
+    private String id;
     private String column2;
     private String column3;
     private String column4;
@@ -204,7 +241,7 @@ public class RoundtripExample extends AbstractExample {
     }
 
 
-  }
+  }*/
 
 //  public static void go(String[] args) {
 //    RoundtripExample example = new RoundtripExample();
@@ -237,7 +274,10 @@ public class RoundtripExample extends AbstractExample {
     producer.register(Customer.class, "Customers", new Func<Iterable<Customer>>() {
       public Iterable<Customer> apply() {
         List<Customer> customers = new ArrayList<Customer>();
-        for(int k = 0;k < dt.size(); k ++) {
+        for(int k = 0;k < 200/*dt.size()*/; k ++) {
+          customers.add(new Customer(String.valueOf(k), dt.get(k).get(3)));
+        }
+        /*for(int k = 0;k < dt.size(); k ++) {
           customers.add(new Customer(dt.get(k).get(0),
                                       dt.get(k).get(1),
                   dt.get(k).get(2),
@@ -254,7 +294,7 @@ public class RoundtripExample extends AbstractExample {
           dt.get(k).get(13),
           dt.get(k).get(14),
           dt.get(k).get(15)));
-        }
+        }*/
         return customers;
       }
     }, "Id");

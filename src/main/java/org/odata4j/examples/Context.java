@@ -56,22 +56,19 @@ public class Context {
 
         System.out.println(url);
         ResponseEntity<String> response=null;
-        //response= a.exchange(url, HttpMethod.GET, entity, String.class);
         response= new ResponseEntity<String>(loadUrl(url),HttpStatus.OK);
-
-        System.out.println(response);
-
+        String tst = response.getBody().replace(":8885",":8080");
         HttpHeaders responseHeaders = new HttpHeaders();
 
         responseHeaders.addAll(response.getHeaders());
-        responseHeaders.add("Access-Control-Allow-Origin", "*");
+        /*responseHeaders.add("Access-Control-Allow-Origin", "*");
         responseHeaders.add("Access-Control-Allow-Methods", "GET");
         responseHeaders.add("Access-Control-Allow-Headers", "Accept, Origin, Content-Type, MaxDataServiceVersion");
-        responseHeaders.add("Access-Control-Expose-Headers", "DataServiceVersion");
+        responseHeaders.add("Access-Control-Expose-Headers", "DataServiceVersion");*/
         responseHeaders.add("Content-type","application/xml");
         //System.out.println("!!!!\n" + response.getBody());
         //return ResponseEntity.ok().headers(responseHeaders).body(response.getBody());
-        return new ResponseEntity<String>(response.getBody(), responseHeaders, HttpStatus.OK );
+        return new ResponseEntity<String>(tst, responseHeaders, HttpStatus.OK );
     }
 
 }
