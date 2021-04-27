@@ -254,7 +254,7 @@ public class RoundtripExample extends AbstractExample {
     // create/start the server
     String endpointUri = "http://localhost:8885/RoundtripExample.svc/";
 
-    InMemoryProducer producer = new InMemoryProducer("RoundtripExample");
+    InMemoryProducer producer = new InMemoryProducer("RoundtripExample",100000);
 
     List<Row> b;
     a.createconnection();
@@ -274,7 +274,7 @@ public class RoundtripExample extends AbstractExample {
     producer.register(Customer.class, "Customers", new Func<Iterable<Customer>>() {
       public Iterable<Customer> apply() {
         List<Customer> customers = new ArrayList<Customer>();
-        for(int k = 0;k < 200/*dt.size()*/; k ++) {
+        for(int k = 0;k < dt.size(); k ++) {
           customers.add(new Customer(String.valueOf(k), dt.get(k).get(3)));
         }
         /*for(int k = 0;k < dt.size(); k ++) {
@@ -298,7 +298,6 @@ public class RoundtripExample extends AbstractExample {
         return customers;
       }
     }, "Id");
-
     DefaultODataProducerProvider.setInstance(producer);
     ODataServer server = new ODataServerFactory(JERSEY).startODataServer(endpointUri);
 
