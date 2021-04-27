@@ -1,4 +1,4 @@
-package org.odata4j.examples;
+package org.odata4j.examples.odatamain;
 
 import org.core4j.Enumerable;
 import org.odata4j.consumer.ODataConsumer;

@@ -1,21 +1,18 @@
-package org.odata4j.examples;
+package org.odata4j.examples.odatamain;
 
-import org.apache.cxf.Bus;
 import org.core4j.Func;
 import org.odata4j.consumer.ODataConsumer;
 import org.odata4j.consumer.ODataConsumers;
+import org.odata4j.examples.proxy.JDBCBase;
+import org.odata4j.examples.proxy.Row;
 import org.odata4j.producer.inmemory.InMemoryProducer;
 import org.odata4j.producer.resources.DefaultODataProducerProvider;
 import org.odata4j.producer.server.ODataServer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.odata4j.examples.JaxRsImplementation.JERSEY;
+import static org.odata4j.examples.odatamain.JaxRsImplementation.JERSEY;
 
 public class RoundtripExample extends AbstractExample {
 
@@ -383,7 +380,7 @@ public class RoundtripExample extends AbstractExample {
 //  }
 
 
-  void run() {
+  public void run() {
 
     // create/start the server
     String endpointUri = "http://localhost:8885/RoundtripExample.svc/";

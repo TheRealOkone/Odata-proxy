@@ -1,4 +1,4 @@
-package org.odata4j.examples;
+package org.odata4j.examples.proxy;
 
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;

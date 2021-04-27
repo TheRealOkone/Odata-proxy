@@ -1,6 +1,6 @@
-package org.odata4j.examples;
+package org.odata4j.examples.proxy;
 
-import org.odata4j.examples.Row;
+import org.odata4j.examples.proxy.Row;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

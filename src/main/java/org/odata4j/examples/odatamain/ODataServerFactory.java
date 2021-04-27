@@ -1,7 +1,8 @@
-package org.odata4j.examples;
+package org.odata4j.examples.odatamain;
 
 import org.odata4j.core.Throwables;
 import org.odata4j.cxf.producer.server.ODataCxfServer;
+import org.odata4j.examples.odatamain.JaxRsImplementation;
 import org.odata4j.jersey.producer.resources.ODataApplication;
 import org.odata4j.jersey.producer.server.ODataJerseyServer;
 import org.odata4j.producer.resources.DefaultODataApplication;
