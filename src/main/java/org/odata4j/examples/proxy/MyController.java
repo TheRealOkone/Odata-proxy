@@ -18,7 +18,7 @@ public class MyController {
     Context c;
 
 
-    @RequestMapping(value = "/Roundtrip15.svc/{s}",
+    @RequestMapping(value = "/RoundtripExample.svc/{s}",
             method = RequestMethod.GET/*,
             produces = MediaType.APPLICATION_ATOM_XML_VALUE*/
     )
@@ -26,7 +26,7 @@ public class MyController {
         return c.foo("http://localhost:8885/RoundtripExample.svc/"+s);
     }
 
-    @RequestMapping(value = "/Roundtrip15.svc/",
+    @RequestMapping(value = "/RoundtripExample.svc/",
             method = RequestMethod.GET/*,
             produces = MediaType.APPLICATION_ATOM_XML_VALUE*/)
     public ResponseEntity<String> sPage() {

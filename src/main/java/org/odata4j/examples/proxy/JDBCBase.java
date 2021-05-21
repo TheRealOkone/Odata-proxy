@@ -80,6 +80,9 @@ public class JDBCBase {
         try {
             stm = connection.createStatement();
             ResultSet rs = stm.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            System.out.println(columnsNumber);
             Row.formTable(rs, table);
             return table;
         } catch (SQLException throwables) {
