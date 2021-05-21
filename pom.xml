@@ -57,6 +57,11 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>2.7.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.27.0-GA</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -67,6 +72,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <source>15</source>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>bundle-javadocs</id>

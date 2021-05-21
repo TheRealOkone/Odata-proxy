@@ -1,18 +1,37 @@
 package org.odata4j.examples.proxy;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
+@Component
+//@Service
 public class Context {
 
-    public static String loadUrl(String u) {
+    private String password;
+    private String user;
+    private String url;
+    private String query;
+
+    public void ini(String password, String user, String url, String query) {
+        this.password = password;
+        this.user = user;
+        this.url = url;
+        this.query = query;
+    }
+
+    public String loadUrl(String u) {
         URL url;
         InputStream is = null;
         BufferedReader br;
@@ -41,7 +60,7 @@ public class Context {
 
 
 
-    public static ResponseEntity<String> foo(String url){
+    public ResponseEntity<String> foo(String url){
         RestTemplate a = new RestTemplate();
         //ResponseEntity<> resp = a.getForObject(url, ResponseEntity.class);
         //ResponseEntity<String> response = a.exchange("http://localhost:8885/RoundtripExample.svc/", HttpMethod.GET, (ResponseEntity<String>)null, String.class, (Object)null);
@@ -57,9 +76,20 @@ public class Context {
         System.out.println(url);
         ResponseEntity<String> response=null;
         response= new ResponseEntity<String>(loadUrl(url),HttpStatus.OK);
-        String tst = response.getBody().replace(":8885",":8080");
-        HttpHeaders responseHeaders = new HttpHeaders();
 
+        JDBCBase base = new JDBCBase(this.url, user, password,query);
+        base.createconnection();
+        List<String> colname = base.cselect();
+        base.close();
+        String tst = response.getBody().replace(":8885",":8080");
+            for(int i = colname.size() - 1;i >= 0; i--)
+                tst = tst.replace("Column" + Integer.toString(i + 1),colname.get(i));
+            
+
+
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        System.out.println(query);
         responseHeaders.addAll(response.getHeaders());
         /*responseHeaders.add("Access-Control-Allow-Origin", "*");
         responseHeaders.add("Access-Control-Allow-Methods", "GET");

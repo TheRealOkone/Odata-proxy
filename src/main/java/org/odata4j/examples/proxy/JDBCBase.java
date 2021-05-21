@@ -55,6 +55,25 @@ public class JDBCBase {
         return new ResponseEntity<List<Row>>(table, HttpStatus.OK);
     }
 
+    public List<String> cselect() {
+        Statement stm = null;
+        ArrayList<String> dt = null;
+        try {
+            stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int NumOfCol = rsmd.getColumnCount();
+            dt = new ArrayList<String>();
+            for (int i = 1; i <= NumOfCol; i++) {
+                dt.add(rsmd.getColumnName(i));
+            }
+            return dt;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return dt;
+    }
+
     public List<Row> altselect() {
         Statement stm = null;
         List<Row> table = new ArrayList<Row>();
